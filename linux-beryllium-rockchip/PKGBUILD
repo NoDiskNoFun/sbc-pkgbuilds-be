@@ -1,47 +1,46 @@
 # AArch64 multi-platform
-# Maintainer: Panda <panda@bredos.org>
-# Maintainer: Bill Sideris <bill88t@bredos.org>
+# Maintainer: Bill Sideris <bill88t@feline.gr>
 
 buildarch=8
-_kernel=linux-bredos-rockchip
+_kernel=linux-beryllium-rockchip
 pkgbase=$_kernel
 pkgname=("${pkgbase}-headers" $pkgbase)
 pkgver=6.1.115
 pkgrel=2
 arch=('aarch64')
 license=('GPL2')
-url="https://github.com/BredOS/linux-bredos"
+url="https://github.com/beryllium-org/linux-beryllium"
 pkgdesc="The Linux Kernel and modules"
 optdepends=('mali-G610-firmware-rkr4: Mali G610 firmware for Rockchip RK3588(S)')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'uboot-tools' 'vboot-utils' 'dtc')
 options=('!strip' 'ccache')
 conflicts=('linux-rockchip-rk3588' 'linux-rockchip' 'linux-rockchip-rkr6' 'linux-rockchip-rkr1' 'linux-rockchip-rkr3')
-source=(git+https://github.com/BredOS/linux-bredos.git#branch=rk6.1-rkr5.1
+source=(git+https://github.com/beryllium-org/linux-beryllium.git#branch=rk6.1-rkr5.1
         'linux.preset'
         'config'
         'dtb-update.hook'
-        'bredos-update-dtbs')
+        'beryllium-update-dtbs')
 sha256sums=('SKIP'
          'e1172898719b095861d7e8353977524741db5e9f4aa191ae7502a98d6cefbfa7'
          'a4149a552e891b9fd85e2b09a1bc0567b28ac191d8776ed3a5840ee90e4a3d2f'
          'ccc5beedd34af9e73c311c1ad072d629e7ee66e16df6999ffc69c1926f344f37'
          '97e46ab2f8e977aec001f23f96411056f448e96c7ce698f4a007c14ebaff9218')
 prepare() {
-  cd linux-bredos
+  cd linux-beryllium
 
   cp ${srcdir}/config .config
 }
 
 build() {
-  cd linux-bredos
+  cd linux-beryllium
 
   echo > .scmversion
   echo > localversion
   # add -Wno-array-compare -Wno-dangling-pointer -Wno-stringop-overread -Wno-misleading-indentation -Wno-address to makefile
   sed -i 's|-std=gnu89|-std=gnu89 -Wno-array-compare -Wno-dangling-pointer -Wno-stringop-overread -Wno-misleading-indentation -Wno-address -Wno-unused-function|g' Makefile
   make olddefconfig prepare
-  # edit makefile to add -bredos to localversion
-  sed -i 's|EXTRAVERSION =|EXTRAVERSION = -bredos|g' Makefile
+  # edit makefile to add -beryllium to localversion
+  sed -i 's|EXTRAVERSION =|EXTRAVERSION = -beryllium|g' Makefile
   make -s kernelrelease > version
   unset LDFLAGS
 
@@ -53,10 +52,10 @@ _package() {
   pkgdesc="The Linux Kernel and modules"
   depends=('coreutils' 'kmod' 'mkinitcpio>=0.7')
   optdepends=('wireless-regdb: to set the correct wireless channels of your country')
-  provides=("linux-bredos-rockchip=${pkgver}" "linux")
+  provides=("linux-beryllium-rockchip=${pkgver}" "linux")
   backup=("etc/mkinitcpio.d/${_kernel}.preset")
 
-  cd linux-bredos
+  cd linux-beryllium
 
   local _version="$(<version)"
 
@@ -90,14 +89,14 @@ _package() {
   # install dtb update hook
   mkdir -p "${pkgdir}/usr/share/libalpm/hooks"
   install -Dm644 "${srcdir}/dtb-update.hook" "${pkgdir}/usr/share/libalpm/hooks/dtb-update.hook"
-  install -Dm755 "${srcdir}/bredos-update-dtbs" "${pkgdir}/usr/bin/bredos-update-dtbs"
+  install -Dm755 "${srcdir}/beryllium-update-dtbs" "${pkgdir}/usr/bin/beryllium-update-dtbs"
 }
 
 _package-headers() {
   pkgdesc="The Linux Kernel and modules - Headers"
-  provides=("linux-headers=${pkgver}" "linux-bredos-rockchip-headers=${pkgver}")
+  provides=("linux-headers=${pkgver}" "linux-beryllium-rockchip-headers=${pkgver}")
 
-  cd linux-bredos
+  cd linux-beryllium
   local _version="$(<version)"
   local builddir="$pkgdir/usr/lib/modules/$_version/build"
 

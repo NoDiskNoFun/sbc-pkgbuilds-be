@@ -1,4 +1,5 @@
-# Maintainer: Panda <panda@bredos.org>
+# Maintainer: Bill Sideris <bill88t@feline.gr>
+
 pkgbase=linux
 _srcname=6.19.y
 _kernelname=${pkgbase#linux}
@@ -10,7 +11,7 @@ url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'uboot-tools' 'dtc')
 options=('!strip')
-source=("git+https://github.com/BredOS/linux-bredos.git#branch=${_srcname}"
+source=("git+https://github.com/beryllium-org/linux-beryllium.git#branch=${_srcname}"
         '0001-net-smsc95xx-Allow-mac-address-to-be-set-as-a-parame.patch'
         '0002-arm64-dts-rockchip-disable-pwm0-on-rk3399-firefly.patch'
         '0003-drivers-gpu-drm-panthor-acpi.patch'
@@ -24,7 +25,7 @@ md5sums=('SKIP'
          '33ba82001fca579d43172a6db25d6aca')
 
 prepare() {
-  cd linux-bredos
+  cd linux-beryllium
 
   echo "Setting version..."
   echo > .scmversion
@@ -39,14 +40,14 @@ prepare() {
 }
 
 build() {
-  cd linux-bredos
+  cd linux-beryllium
 
   # get kernel version
   make olddefconfig prepare
   echo > .scmversion
   echo > localversion
 
-  sed -i 's|EXTRAVERSION =\(.*\)|EXTRAVERSION = -bredos|g' Makefile
+  sed -i 's|EXTRAVERSION =\(.*\)|EXTRAVERSION = -beryllium|g' Makefile
   sed -i 's|echo "+"|echo ""|g' scripts/setlocalversion
   make kernelrelease > version
   # build!
@@ -61,13 +62,13 @@ _package() {
   depends=('coreutils' 'linux-firmware' 'kmod')
   optdepends=('wireless-regdb: to set the correct wireless channels of your country'
               'mkinitcpio>=0.7: To use mkinitcpio for initramfs generation'
-              'bredos-dracut: To use Dracut for initramfs generation')
+              'beryllium-dracut: To use Dracut for initramfs generation')
   provides=("linux=${pkgver}" "KSMBD-MODULE" "WIREGUARD-MODULE")
   conflicts=('linux-aarch64')
   backup=("etc/mkinitcpio.d/${pkgbase}.preset")
   install=${pkgname}.install
 
-  cd linux-bredos
+  cd linux-beryllium
   local kernver="$(<version)"
   local modulesdir="$pkgdir/usr/lib/modules/$kernver"
 
@@ -104,7 +105,7 @@ _package-headers() {
   provides=("linux-headers=${pkgver}")
   conflicts=('linux-aarch64-headers')
 
-  cd linux-bredos
+  cd linux-beryllium
   local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
 
   echo "Installing build files..."

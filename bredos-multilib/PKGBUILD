@@ -1,11 +1,11 @@
-# Maintainer: Panda <panda@bredos.org>
+# Maintainer: Bill Sideris <bill88t@feline.gr>
 
-pkgname=bredos-multilib
+pkgname=beryllium-multilib
 pkgver=20240720
 pkgrel=1
-pkgdesc="BredOS multilib"
+pkgdesc="Beryllium OS multilib"
 arch=('aarch64')
-url="https://github.com/BredOS/bredos-multilib"
+url="https://github.com/Beryllium-org/beryllium-multilib"
 license=('GPL3')
 install=${pkgname}.install
 
