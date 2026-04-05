@@ -1,10 +1,10 @@
 # Maintainer: Bill Sideris <bill88t@feline.gr>
 
 pkgbase=linux
-_srcname=6.19.y
+_srcname=7.0.y
 _kernelname=${pkgbase#linux}
 _desc="AArch64 multi-platform"
-pkgver=6.19.1
+pkgver=7.0.rc3
 pkgrel=1
 arch=('aarch64')
 url="http://www.kernel.org/"
@@ -18,10 +18,10 @@ source=("git+https://github.com/beryllium-org/linux-beryllium.git#branch=${_srcn
         'config'
         'linux.preset')
 md5sums=('SKIP'
-         '7b08a199a97e3e2288e5c03d8e8ded2d'
+         'd182953cf7a797517f50a5cfd3718cbd'
          'c9d4e392555b77034e24e9f87c5ff0b3'
          'b96f83a095aeb2409a852199135c8798'
-         'b48baff690a2ef6b0ea512c4f24bc5f2'
+         'e264574a09c7af0a4f291cdee0954794'
          '33ba82001fca579d43172a6db25d6aca')
 
 prepare() {

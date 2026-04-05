@@ -13,7 +13,7 @@ ap6256.tar.gz
 /libmali/*
 /ap6275p-firmware/firmware/*
 /linux-mekotronics/linux-rockchip
-/linux-cix/linux-bredos
+/linux-cix/linux-beryllium
 /linux-rockchip/linux-rockchip
 /ap6275p/firmware/*
 /linux-cpi/coolpi-kernel/
@@ -26,12 +26,12 @@ bcmdhd-dkms/bcmdhd-dkms
 uboot-radxa-zero-3/trusted-firmware-a.tar.gz
 uboot-radxa-zero-3/v2024.10.tar.gz
 linux-rockchip-rkr3/linux-rockchip
-linux-rockchip-rkr3/linux-bredos
+linux-rockchip-rkr3/linux-beryllium
 rtlmac/rtnicpg
 linux-vim/
 uboot-vim4/old/
-linux-h618/linux-bredos
-linux/linux-bredos
+linux-h618/linux-beryllium
+linux/linux-beryllium
 .vscode-ctags
-linux*/linux-bredos
+linux*/linux-beryllium
 linux*/linux/
