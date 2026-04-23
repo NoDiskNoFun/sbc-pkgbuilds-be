@@ -22,7 +22,8 @@ makedepends=(cmake
              clblast
              vulkan-headers
              vulkan-icd-loader
-             shaderc)
+             shaderc
+             cuda)
 source=(git+https://github.com/ollama/ollama#tag=v$pkgver
         ollama-ld.conf
         ollama.service
