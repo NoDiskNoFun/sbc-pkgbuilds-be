@@ -18,8 +18,7 @@ depends=(
   python
   gcc
 )
-provides=("cuda=$pkgver")  
-conflicts=(cuda)           
+conflicts=(cuda)
 options=(!strip !debug staticlibs)
 install=cuda.install
 source_x86_64=(https://developer.download.nvidia.com/compute/cuda/${pkgver}/local_installers/cuda_${pkgver}_${_driverver}_linux.run)
@@ -152,9 +151,9 @@ build() {
   done
 }
 
-package_cuda() {
+package_cuda-13() {
   replaces=('cuda-toolkit' 'cuda-sdk' 'cuda-static' 'cuda-tools')
-  provides=('cuda-toolkit' 'cuda-sdk' 'libcudart.so' 'libcublas.so' 'libcusolver.so' 'libcusparse.so')
+  provides=('cuda-toolkit' 'cuda-sdk' 'libcudart.so' 'libcublas.so' 'libcusolver.so' 'libcusparse.so' 'cuda=$pkgver')
   optdepends=('gdb: for cuda-gdb'
               'glu: required for some profiling tools in CUPTI'
               'nvidia-utils: for NVIDIA drivers (not needed in CDI containers)'
