@@ -19,9 +19,7 @@ pkgdesc="Native Steam bootstrapper for aarch64 (ARM64); downloads the actual cli
 arch=('aarch64')
 url="https://store.steampowered.com/"
 license=('custom')
-depends=('gtk2' 'libvdpau' 'sdl2_mixer' 'sdl2-compat' 'openal' 'lsof' 'curl' 'unzip' 'grep' 'libvpx')
-optdepends=('box64: run x86/x86_64 game binaries via user-mode emulation'
-            'fex-emu: alternative x86/x86_64 emulation layer for running games')
+depends=('gtk2' 'libvdpau' 'sdl2_mixer' 'sdl2-compat' 'openal' 'lsof' 'curl' 'unzip' 'grep' 'libvpx' 'box64')
 makedepends=('curl' 'graphicsmagick')
 options=('!strip')
 install=steam-arm64.install
